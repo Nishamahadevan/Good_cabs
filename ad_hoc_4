@@ -1,0 +1,21 @@
+#top 3 and bottom 3 cities
+WITH pass_cte AS(
+SELECT city_id, sum(new_passengers) as Total_New_Passengers
+FROM fact_passenger_summary
+GROUP BY city_id),
+ rank_cte AS(
+SELECT city_name, Total_New_Passengers,
+RANK () OVER(order by Total_New_Passengers DESC) as Ranking
+FROM pass_cte
+ join dim_city on pass_cte.city_id=dim_city.city_id),
+category_cte AS( 
+ select city_name, Total_New_Passengers, 
+ (CASE 
+ WHEN Ranking <=3 THEN 'Top 3'
+ WHEN Ranking >=8 THEN 'Bottom 3'
+ ELSE 'Middle Rank'
+ END) AS City_Category
+ FROM rank_cte
+GROUP BY city_name, Total_New_Passengers)
+SELECT city_name,Total_New_Passengers, City_Category FROM category_cte
+WHERE city_Category='Top 3' OR City_Category='Bottom 3';
