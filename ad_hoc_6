@@ -1,0 +1,28 @@
+SELECT 
+    city_name,
+    MONTHNAME(month) AS Month,
+    total_passengers,
+    repeat_passengers,
+    CONCAT(ROUND((repeat_passengers / total_passengers) * 100,
+                    2),
+            '%') AS Monthly_Repeat_Passenger_Rate
+FROM
+    fact_passenger_summary
+        JOIN
+    dim_city ON fact_passenger_summary.city_id = dim_city.city_id;
+ 
+ 
+ --  BUSINESS REQUEST:6B  Repeat Passenger Rate Analysis
+--  City-Wide Repeat Passenger Rate 
+
+SELECT 
+    city_name,
+    CONCAT(ROUND(SUM(repeat_passengers) / SUM(total_passengers) * 100,
+                    2),
+            '%') AS Overall_Repeat_passenger_Rate
+FROM
+    fact_passenger_summary f
+        JOIN
+    dim_city d ON f.city_id = d.city_id
+GROUP BY f.city_id
+ORDER BY Overall_Repeat_passenger_Rate DESC;
