@@ -1,4 +1,4 @@
-project outline for "GoodCabs - Transportation and Operation Analysis"
+Project Outline for "GoodCabs - Transportation and Operation Analysis"
 
 GoodCabs, a mid-sized ride-hailing company operating in multiple metropolitan cities, was facing operational inefficiencies, increasing customer complaints, and rising costs. With growing competition and customer expectations, it was crucial for GoodCabs to assess its transportation and operational strategies to maintain market share and improve profitability.
 
@@ -11,6 +11,7 @@ Analyze trip data to understand customer behavior, peak demand periods, and unde
 Optimize dispatch and routing algorithms.
 
 Recommend cost-saving strategies while improving service efficiency and customer satisfaction.
+The Steps involved in the analysis
 
 Data Collection & Cleansing:
 
